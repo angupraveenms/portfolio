@@ -8,18 +8,25 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledJobsSection = styled.section`
-  max-width: 700px;
+  max-width: 1000px; /* Standardized to 1000px */
+  margin: 0 auto;
+  padding: 100px 0; /* Standardized vertical padding */
+
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
 
   .inner {
     display: flex;
+    /* Added alignment to ensure a clean look in the larger container */
+    align-items: flex-start;
 
     @media (max-width: 600px) {
       display: block;
     }
 
-    // Prevent container from jumping
     @media (min-width: 700px) {
-      min-height: 340px;
+      min-height: 400px; /* Increased min-height for the larger layout */
     }
   }
 `;
@@ -27,7 +34,8 @@ const StyledJobsSection = styled.section`
 const StyledTabList = styled.div`
   position: relative;
   z-index: 3;
-  width: max-content;
+  width: 280px; /* Increased slightly */
+  min-width: 280px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -40,30 +48,6 @@ const StyledTabList = styled.div`
     margin-left: -50px;
     margin-bottom: 30px;
   }
-  @media (max-width: 480px) {
-    width: calc(100% + 50px);
-    padding-left: 25px;
-    margin-left: -25px;
-  }
-
-  li {
-    &:first-of-type {
-      @media (max-width: 600px) {
-        margin-left: 50px;
-      }
-      @media (max-width: 480px) {
-        margin-left: 25px;
-      }
-    }
-    &:last-of-type {
-      @media (max-width: 600px) {
-        padding-right: 50px;
-      }
-      @media (max-width: 480px) {
-        padding-right: 25px;
-      }
-    }
-  }
 `;
 
 const StyledTabButton = styled.button`
@@ -71,22 +55,24 @@ const StyledTabButton = styled.button`
   display: flex;
   align-items: center;
   width: 100%;
-  height: var(--tab-height);
-  padding: 0 20px 2px;
+  /* Increase height to 60px to fit two lines of text if needed */
+  height: 60px;
+  padding: 0 20px;
   border-left: 2px solid var(--lightest-navy);
   background-color: transparent;
   color: ${({ isActive }) => (isActive ? 'var(--green)' : 'var(--slate)')};
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   text-align: left;
-  white-space: nowrap;
 
-  @media (max-width: 768px) {
-    padding: 0 15px 2px;
-  }
+  /* REMOVE white-space: nowrap; and text-overflow */
+  white-space: normal;
+  line-height: 1.2;
+
   @media (max-width: 600px) {
     ${({ theme }) => theme.mixins.flexCenter};
     min-width: 120px;
+    height: var(--tab-height); /* Keep original height on mobile horizontal scroll */
     padding: 0 15px;
     border-left: 0;
     border-bottom: 2px solid var(--lightest-navy);
@@ -105,10 +91,12 @@ const StyledHighlight = styled.div`
   left: 0;
   z-index: 10;
   width: 2px;
-  height: var(--tab-height);
+  /* Match the new 60px height */
+  height: 60px;
   border-radius: var(--border-radius);
   background: var(--green);
-  transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
+  /* Update the math to use 60px instead of var(--tab-height) */
+  transform: translateY(calc(${({ activeTabId }) => activeTabId} * 60px));
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 0.1s;
 
@@ -121,15 +109,12 @@ const StyledHighlight = styled.div`
     margin-left: 50px;
     transform: translateX(calc(${({ activeTabId }) => activeTabId} * var(--tab-width)));
   }
-  @media (max-width: 480px) {
-    margin-left: 25px;
-  }
 `;
 
 const StyledTabPanels = styled.div`
   position: relative;
   width: 100%;
-  margin-left: 20px;
+  margin-left: 50px; /* Larger gap to match the 1000px width */
 
   @media (max-width: 600px) {
     margin-left: 0;
@@ -146,8 +131,8 @@ const StyledTabPanel = styled.div`
   }
 
   h3 {
-    margin-bottom: 2px;
-    font-size: var(--fz-xxl);
+    margin-bottom: 5px;
+    font-size: var(--fz-heading); /* Larger heading for the bigger section */
     font-weight: 500;
     line-height: 1.3;
 
@@ -157,10 +142,17 @@ const StyledTabPanel = styled.div`
   }
 
   .range {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     color: var(--light-slate);
     font-family: var(--font-mono);
-    font-size: var(--fz-xs);
+    font-size: var(--fz-sm);
+  }
+
+  /* Keep descriptions justified and clear */
+  div {
+    text-align: justify;
+    font-size: var(--fz-lg);
+    line-height: 1.6;
   }
 `;
 
@@ -199,7 +191,6 @@ const Jobs = () => {
     if (prefersReducedMotion) {
       return;
     }
-
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
@@ -208,20 +199,16 @@ const Jobs = () => {
       tabs.current[tabFocus].focus();
       return;
     }
-    // If we're at the end, go to the start
     if (tabFocus >= tabs.current.length) {
       setTabFocus(0);
     }
-    // If we're at the start, move to the end
     if (tabFocus < 0) {
       setTabFocus(tabs.current.length - 1);
     }
   };
 
-  // Only re-run the effect if tabFocus changes
   useEffect(() => focusTab(), [tabFocus]);
 
-  // Focus on tabs when using up & down arrow keys
   const onKeyDown = e => {
     switch (e.key) {
       case KEY_CODES.ARROW_UP: {
@@ -229,13 +216,11 @@ const Jobs = () => {
         setTabFocus(tabFocus - 1);
         break;
       }
-
       case KEY_CODES.ARROW_DOWN: {
         e.preventDefault();
         setTabFocus(tabFocus + 1);
         break;
       }
-
       default: {
         break;
       }
@@ -244,7 +229,7 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+      <h2 className="numbered-heading">Professional Experience</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
@@ -288,7 +273,7 @@ const Jobs = () => {
                       <span>{title}</span>
                       <span className="company">
                         &nbsp;@&nbsp;
-                        <a href={url} className="inline-link">
+                        <a href={url} className="inline-link" target="_blank" rel="noreferrer">
                           {company}
                         </a>
                       </span>

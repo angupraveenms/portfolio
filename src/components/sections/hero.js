@@ -33,6 +33,12 @@ const StyledHeroSection = styled.section`
     margin-top: 5px;
     color: var(--slate);
     line-height: 0.9;
+    /* Reduced from clamp(40px, 8vw, 70px) to a smaller range */
+    font-size: clamp(30px, 6vw, 50px);
+
+    @media (max-width: 480px) {
+      margin-bottom: 20px;
+    }
   }
 
   p {
@@ -60,28 +66,25 @@ const Hero = () => {
   }, []);
 
   const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
+  const two = <h2 className="big-heading">Angu Praveen</h2>;
+  const three = (
+    <h3 className="big-heading">I engineer data-driven solutions for complex systems.</h3>
+  );
   const four = (
     <>
       <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
+        I’m a Computational Engineer specializing in Finite Element Analysis, thermal, structural,
+        mechanical and CFD simulations. Currently, I am a Professional Doctorate Candidate at{' '}
+        <a href="https://www.amsterdamuas.com/" target="_blank" rel="noreferrer">
+          AUAS
         </a>
-        .
+        , focusing on Explainable Predictive Maintenance (PdM) for marine auxiliary systems.
       </p>
     </>
   );
   const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
+    <a className="email-link" href="/resume.pdf" target="_blank" rel="noreferrer">
+      Download Resume
     </a>
   );
 

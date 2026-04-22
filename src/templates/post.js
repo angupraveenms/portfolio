@@ -8,15 +8,39 @@ import { Layout } from '@components';
 
 const StyledPostContainer = styled.main`
   max-width: 1000px;
+  margin: 0 auto;
+  padding: 150px 20px;
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
+    a {
+      ${({ theme }) => theme.mixins.inlineLink};
+    }
+  }
 `;
+
 const StyledPostHeader = styled.header`
   margin-bottom: 50px;
   .tag {
     margin-right: 10px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xs);
   }
 `;
+
 const StyledPostContent = styled.div`
   margin-bottom: 100px;
+  color: var(--slate);
+  font-size: var(--fz-xl);
+  line-height: 1.6;
+  text-align: justify;
+
   h1,
   h2,
   h3,
@@ -24,45 +48,52 @@ const StyledPostContent = styled.div`
   h5,
   h6 {
     margin: 2em 0 1em;
+    color: var(--lightest-slate);
   }
 
   p {
     margin: 1em 0;
-    line-height: 1.5;
-    color: var(--light-slate);
   }
 
-  a {
-    ${({ theme }) => theme.mixins.inlineLink};
+  strong {
+    color: var(--white);
+    font-weight: 600;
   }
 
-  code {
-    background-color: var(--lightest-navy);
-    color: var(--lightest-slate);
-    border-radius: var(--border-radius);
-    font-size: var(--fz-sm);
-    padding: 0.2em 0.4em;
-  }
-
-  pre code {
-    background-color: transparent;
+  ul {
+    list-style: none;
     padding: 0;
+    li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 10px;
+      &:before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--green);
+      }
+    }
   }
 `;
 
 const PostTemplate = ({ data, location }) => {
+  // If data is missing, Gatsby hasn't finished the handshake
+  if (!data || !data.markdownRemark) {
+    return null;
+  }
+
   const { frontmatter, html } = data.markdownRemark;
   const { title, date, tags } = frontmatter;
 
   return (
     <Layout location={location}>
-      <Helmet title={title} />
-
+      <Helmet title={`${title} | Portfolio`} />
       <StyledPostContainer>
-        <span className="breadcrumb">
+        <div className="breadcrumb">
           <span className="arrow">&larr;</span>
-          <Link to="/pensieve">All memories</Link>
-        </span>
+          <Link to="/">Back to Home</Link>
+        </div>
 
         <StyledPostHeader>
           <h1 className="medium-heading">{title}</h1>
@@ -74,14 +105,16 @@ const PostTemplate = ({ data, location }) => {
                 day: 'numeric',
               })}
             </time>
-            <span>&nbsp;&mdash;&nbsp;</span>
-            {tags &&
-              tags.length > 0 &&
-              tags.map((tag, i) => (
-                <Link key={i} to={`/pensieve/tags/${kebabCase(tag)}/`} className="tag">
-                  #{tag}
-                </Link>
-              ))}
+            {tags && tags.length > 0 && (
+              <>
+                <span>&nbsp;&mdash;&nbsp;</span>
+                {tags.map((tag, i) => (
+                  <Link key={i} to={`/pensieve/tags/${kebabCase(tag)}/`} className="tag">
+                    #{tag}
+                  </Link>
+                ))}
+              </>
+            )}
           </p>
         </StyledPostHeader>
 
@@ -91,16 +124,17 @@ const PostTemplate = ({ data, location }) => {
   );
 };
 
-export default PostTemplate;
-
 PostTemplate.propTypes = {
   data: PropTypes.object,
   location: PropTypes.object,
 };
 
+export default PostTemplate;
+
+// This query looks for the slug passed from gatsby-node.js
 export const pageQuery = graphql`
-  query($path: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $path } }) {
+  query GetPostBySlug($slug: String!) {
+    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         title

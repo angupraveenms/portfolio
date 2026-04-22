@@ -17,6 +17,9 @@ import {
   IconTwitter,
 } from '@components/icons';
 
+// Directly importing your new WhatsApp icon file
+import IconWhatsApp from './whatsapp';
+
 const Icon = ({ name }) => {
   switch (name) {
     case 'AppStore':
@@ -47,6 +50,8 @@ const Icon = ({ name }) => {
       return <IconStar />;
     case 'Twitter':
       return <IconTwitter />;
+    case 'WhatsApp':
+      return <IconWhatsApp />;
     default:
       return <IconExternal />;
   }

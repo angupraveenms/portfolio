@@ -1,44 +1,37 @@
 import React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
-import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
 
-const StyledProjectsGrid = styled.ul`
-  ${({ theme }) => theme.mixins.resetList};
+const StyledFeaturedSection = styled.section`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 100px 0;
 
-  a {
-    position: relative;
-    z-index: 1;
+  .numbered-heading {
+    margin-bottom: 50px;
   }
 `;
 
-const StyledProject = styled.li`
-  position: relative;
+const StyledProject = styled.div`
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
+  margin-bottom: 100px;
 
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.boxShadow};
   }
 
-  &:not(:last-of-type) {
-    margin-bottom: 100px;
-
-    @media (max-width: 768px) {
-      margin-bottom: 70px;
-    }
-
-    @media (max-width: 480px) {
-      margin-bottom: 30px;
-    }
+  &:last-of-type {
+    margin-bottom: 0;
   }
 
+  /* PROJECT 1: Text Right, Image Left (OVERLAPPING) */
   &:nth-of-type(odd) {
     .project-content {
       grid-column: 7 / -1;
@@ -52,20 +45,14 @@ const StyledProject = styled.li`
         padding: 40px 40px 30px;
         text-align: left;
       }
-      @media (max-width: 480px) {
-        padding: 25px 25px 20px;
-      }
     }
     .project-tech-list {
       justify-content: flex-end;
-
       @media (max-width: 768px) {
         justify-content: flex-start;
       }
-
       li {
         margin: 0 0 5px 20px;
-
         @media (max-width: 768px) {
           margin: 0 10px 5px 0;
         }
@@ -84,34 +71,26 @@ const StyledProject = styled.li`
     }
     .project-image {
       grid-column: 1 / 8;
-
       @media (max-width: 768px) {
         grid-column: 1 / -1;
       }
     }
   }
 
+  /* PROJECT 2: Text Left, Image Right (OVERLAPPING) */
   .project-content {
     position: relative;
     grid-column: 1 / 7;
     grid-row: 1 / -1;
+    z-index: 2;
 
     @media (max-width: 1080px) {
       grid-column: 1 / 9;
     }
-
     @media (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
       grid-column: 1 / -1;
       padding: 40px 40px 30px;
       z-index: 5;
-    }
-
-    @media (max-width: 480px) {
-      padding: 30px 25px 20px;
     }
   }
 
@@ -126,29 +105,7 @@ const StyledProject = styled.li`
   .project-title {
     color: var(--lightest-slate);
     font-size: clamp(24px, 5vw, 28px);
-
-    @media (min-width: 768px) {
-      margin: 0 0 20px;
-    }
-
-    @media (max-width: 768px) {
-      color: var(--white);
-
-      a {
-        position: static;
-
-        &:before {
-          content: '';
-          display: block;
-          position: absolute;
-          z-index: 0;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-        }
-      }
-    }
+    margin: 0 0 20px;
   }
 
   .project-description {
@@ -160,24 +117,12 @@ const StyledProject = styled.li`
     background-color: var(--light-navy);
     color: var(--light-slate);
     font-size: var(--fz-lg);
+    text-align: justify;
 
     @media (max-width: 768px) {
       padding: 20px 0;
       background-color: transparent;
       box-shadow: none;
-
-      &:hover {
-        box-shadow: none;
-      }
-    }
-
-    a {
-      ${({ theme }) => theme.mixins.inlineLink};
-    }
-
-    strong {
-      color: var(--white);
-      font-weight: normal;
     }
   }
 
@@ -197,15 +142,6 @@ const StyledProject = styled.li`
       font-size: var(--fz-xs);
       white-space: nowrap;
     }
-
-    @media (max-width: 768px) {
-      margin: 10px 0;
-
-      li {
-        margin: 0 10px 5px 0;
-        color: var(--lightest-slate);
-      }
-    }
   }
 
   .project-links {
@@ -214,34 +150,17 @@ const StyledProject = styled.li`
     position: relative;
     margin-top: 10px;
     margin-left: -10px;
-    color: var(--lightest-slate);
+    justify-content: flex-start;
 
-    a {
-      ${({ theme }) => theme.mixins.flexCenter};
-      padding: 10px;
-
-      &.external {
-        svg {
-          width: 22px;
-          height: 22px;
-          margin-top: -4px;
-        }
-      }
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    .cta {
+    .learn-more-link {
       ${({ theme }) => theme.mixins.smallButton};
-      margin: 10px;
+      margin: 0 10px;
+      font-size: var(--fz-xs);
+      font-family: var(--font-mono);
     }
   }
 
   .project-image {
-    ${({ theme }) => theme.mixins.boxShadow};
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
@@ -253,51 +172,27 @@ const StyledProject = styled.li`
       opacity: 0.25;
     }
 
-    a {
+    .img-wrapper {
       width: 100%;
       height: 100%;
-      background-color: var(--green);
       border-radius: var(--border-radius);
-      vertical-align: middle;
-
-      &:hover,
-      &:focus {
-        background: transparent;
-        outline: 0;
-
-        &:before,
-        .img {
-          background: transparent;
-          filter: none;
-        }
-      }
-
+      display: block;
+      position: relative;
+      /* Mask removed as requested */
       &:before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 3;
-        transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
+        content: none;
       }
     }
 
     .img {
       border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
-
+      transition: var(--transition);
+      /* Color filters removed */
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
         height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
+        filter: grayscale(0%) contrast(1) brightness(90%);
       }
     }
   }
@@ -305,112 +200,93 @@ const StyledProject = styled.li`
 
 const Featured = () => {
   const data = useStaticQuery(graphql`
-    {
+    query {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        # CHANGED: Now sorting by weight instead of date
+        sort: { fields: [frontmatter___weight], order: ASC }
       ) {
         edges {
           node {
             frontmatter {
               title
+              description
               cover {
                 childImageSharp {
-                  gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                  gatsbyImageData(width: 700, placeholder: BLURRED)
                 }
               }
               tech
-              github
-              external
-              cta
+              slug
+              weight # Added to ensure it is available in the data
             }
-            html
           }
         }
       }
     }
   `);
 
-  const featuredProjects = data.featured.edges.filter(({ node }) => node);
+  const featuredProjects = data.featured.edges;
   const revealTitle = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
+    if (prefersReducedMotion) {return;}
     sr.reveal(revealTitle.current, srConfig());
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
   }, []);
 
   return (
-    <section id="projects">
+    <StyledFeaturedSection id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
         Some Things I’ve Built
       </h2>
 
-      <StyledProjectsGrid>
+      <div className="featured-container">
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
-            const { frontmatter, html } = node;
-            const { external, title, tech, github, cover, cta } = frontmatter;
+            const { frontmatter } = node;
+            const { title, tech, cover, slug, description } = frontmatter;
             const image = getImage(cover);
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
-                  <div>
-                    <p className="project-overline">Featured Project</p>
+                  <p className="project-overline">Featured Project</p>
+                  <h3 className="project-title">{title}</h3>
 
-                    <h3 className="project-title">
-                      <a href={external}>{title}</a>
-                    </h3>
+                  <div className="project-description">
+                    <p>{description}</p>
+                  </div>
 
-                    <div
-                      className="project-description"
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
+                  {tech.length && (
+                    <ul className="project-tech-list">
+                      {tech.map((t, index) => (
+                        <li key={index}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
 
-                    {tech.length && (
-                      <ul className="project-tech-list">
-                        {tech.map((tech, i) => (
-                          <li key={i}>{tech}</li>
-                        ))}
-                      </ul>
+                  <div className="project-links">
+                    {slug && (
+                      <Link to={slug} className="learn-more-link">
+                        Learn More
+                      </Link>
                     )}
-
-                    <div className="project-links">
-                      {cta && (
-                        <a href={cta} aria-label="Course Link" className="cta">
-                          Learn More
-                        </a>
-                      )}
-                      {github && (
-                        <a href={github} aria-label="GitHub Link">
-                          <Icon name="GitHub" />
-                        </a>
-                      )}
-                      {external && !cta && (
-                        <a href={external} aria-label="External Link" className="external">
-                          <Icon name="External" />
-                        </a>
-                      )}
-                    </div>
                   </div>
                 </div>
 
                 <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
+                  <Link to={slug} className="img-wrapper">
                     <GatsbyImage image={image} alt={title} className="img" />
-                  </a>
+                  </Link>
                 </div>
               </StyledProject>
             );
           })}
-      </StyledProjectsGrid>
-    </section>
+      </div>
+    </StyledFeaturedSection>
   );
 };
 
