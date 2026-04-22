@@ -41,7 +41,7 @@ The prototype is structured into five functional layers to support a traceable d
 4.  **Visualization:** A localized **Dash/Plotly** dashboard presenting interpretable diagnostics to both ship and shore personnel.
 5.  **Operator Feedback:** A "human-in-the-loop" cycle that allows marine engineers to refine model thresholds, ensuring continuous improvement.
 
-![System Architecture for Maritime PdM](./pdm-architecture.png)
+![System Architecture for Maritime PdM](./flow.png)
 
 <p align="center"><em>Figure 2: Five-layer architecture for the explainable predictive maintenance prototype</em></p>
 
