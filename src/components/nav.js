@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby'; // <-- Added withPrefix here
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled, { css } from 'styled-components';
@@ -8,6 +8,8 @@ import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
+
+// ... (Styled components remain exactly the same)
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -205,8 +207,13 @@ const Nav = ({ isHome }) => {
     </div>
   );
 
+  // <-- Updated the href path below
   const ResumeLink = (
-    <a className="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+    <a
+      className="resume-button"
+      href={withPrefix('/resume.pdf')}
+      target="_blank"
+      rel="noopener noreferrer">
       Resume
     </a>
   );
