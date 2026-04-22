@@ -19,10 +19,6 @@ In the maritime industry, auxiliary systems—specifically diesel generators—a
 
 This Professional Doctorate project at the **Amsterdam University of Applied Sciences (AUAS)** develops an **Explainable Predictive Maintenance (PdM)** prototype. Unlike traditional "black-box" AI, this research integrates explainability metrics directly into the operator's decision workflow, creating verifiable and auditable maintenance insights aligned with emerging maritime certification standards such as the EU AI Act and DNV requirements.
 
-![Maritime Auxiliary System Architecture](./marine-engine.png)
-
-<p align="center"><em>Figure 1: Digital transformation of legacy shipboard systems into intelligent maintenance hubs</em></p>
-
 ### The Interpretability Framework
 
 A critical challenge in safety-critical maritime environments is trust. This project builds on established experience in the aviation domain to translate high-stakes predictive modeling into the maritime context. By using interpretable AI techniques, the system reveals _why_ a maintenance action is recommended, rather than just providing a binary alert.
