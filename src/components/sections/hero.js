@@ -3,6 +3,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
+import { withPrefix } from 'gatsby'; // <-- 1. Imported withPrefix here
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -82,8 +83,10 @@ const Hero = () => {
       </p>
     </>
   );
+
+  // <-- 2. Wrapped the href path in withPrefix() below
   const five = (
-    <a className="email-link" href="/resume.pdf" target="_blank" rel="noreferrer">
+    <a className="email-link" href={withPrefix('/resume.pdf')} target="_blank" rel="noreferrer">
       Download Resume
     </a>
   );
