@@ -134,28 +134,23 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Angu Praveen and I specialize in solving complex engineering
-              problems through advanced simulations. My interest in computational engineering
-              started during my mechanical engineering studies, evolving into a deep focus on FEA,
-              thermal, and CFD analyses.
+              Over the past 4+ years, I’ve worked on simulation-driven product development across
+              semiconductor, automotive, aerospace, and marine industries.
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at a major automotive
-              supplier, a leading research facility, and a global engineering consulting firm.
-              Currently, I am pursuing my Professional Doctorate at the Amsterdam University of
-              Applied Sciences.
+              My work has ranged from optimizing cooling circuits for EUV lithography systems, to
+              automating strength verification workflows for automotive steering components, to
+              improving aerodynamic efficiency in long-range aircraft design.
             </p>
 
             <p>
-              My main focus these days is developing Explainable Predictive Maintenance (PdM)
-              prototypes for marine auxiliary systems bridging the gap between traditional
-              multiphysics analysis and modern, interpretable AI models like GAMs and EBMs.
+              I enjoy bridging physics-based engineering with automation and AI—building tools and
+              workflows that reduce manual effort, accelerate design iterations, and improve
+              decision-making.
             </p>
 
-            <p>
-              Here are a few computational tools and technologies I’ve been working with recently:
-            </p>
+            <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
 
           <ul className="skills-list">
