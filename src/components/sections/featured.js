@@ -31,14 +31,14 @@ const StyledProject = styled.div`
     margin-bottom: 0;
   }
 
-  /* PROJECT 1: Text Right, Image Left (OVERLAPPING) */
+  /* PROJECT 1: Text Right, Image Left (SIDE BY SIDE - NO OVERLAP) */
   &:nth-of-type(odd) {
     .project-content {
-      grid-column: 7 / -1;
+      grid-column: 7 / -1; /* Text takes columns 7 through 12 */
       text-align: right;
 
       @media (max-width: 1080px) {
-        grid-column: 5 / -1;
+        grid-column: 6 / -1;
       }
       @media (max-width: 768px) {
         grid-column: 1 / -1;
@@ -70,22 +70,22 @@ const StyledProject = styled.div`
       }
     }
     .project-image {
-      grid-column: 1 / 8;
+      grid-column: 1 / 6; /* Image takes columns 1 through 5. Column 6 is empty space! */
       @media (max-width: 768px) {
         grid-column: 1 / -1;
       }
     }
   }
 
-  /* PROJECT 2: Text Left, Image Right (OVERLAPPING) */
+  /* PROJECT 2: Text Left, Image Right (SIDE BY SIDE - NO OVERLAP) */
   .project-content {
     position: relative;
-    grid-column: 1 / 7;
+    grid-column: 1 / 7; /* Text takes columns 1 through 6 */
     grid-row: 1 / -1;
     z-index: 2;
 
     @media (max-width: 1080px) {
-      grid-column: 1 / 9;
+      grid-column: 1 / 8;
     }
     @media (max-width: 768px) {
       grid-column: 1 / -1;
@@ -161,10 +161,11 @@ const StyledProject = styled.div`
   }
 
   .project-image {
-    grid-column: 6 / -1;
+    grid-column: 8 / -1; /* Image takes columns 8 through 12. Column 7 is empty space! */
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;
+    align-self: center; /* Keeps the image vertically centered next to the text */
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
@@ -174,7 +175,7 @@ const StyledProject = styled.div`
 
     .img-wrapper {
       width: 100%;
-      height: 100%;
+      height: auto;
       border-radius: var(--border-radius);
       display: block;
       position: relative;
@@ -203,7 +204,6 @@ const Featured = () => {
     query {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        # CHANGED: Now sorting by weight instead of date
         sort: { fields: [frontmatter___weight], order: ASC }
       ) {
         edges {
@@ -218,7 +218,7 @@ const Featured = () => {
               }
               tech
               slug
-              weight # Added to ensure it is available in the data
+              weight 
             }
           }
         }
