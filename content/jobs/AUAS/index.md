@@ -1,12 +1,13 @@
 ---
 date: '2025-09-01'
-title: 'Professional Doctorate Candidate'
-company: 'Amsterdam University of Applied Science'
+title: 'Independent Research Consultant – Predictive Maintenance & Digital Twin'
+company: 'Amsterdam University of Applied Sciences (External Collaboration)'
 location: 'Amsterdam, NL'
-range: 'September 2025 - Present'
+range: 'September 2025 - June 2026'
 url: 'https://www.amsterdamuas.com/'
 ---
 
-- Developing an Explainable Predictive Maintenance (PdM) prototype using legacy shipboard data to deliver transparent maintenance decisions for marine auxiliary systems.
-- Engineering interpretable AI models (GAM, EBM) that integrate explainability metrics directly into operator workflows for verifiable insights.
-- Designing a decision-support dashboard to visualize health indices, anomaly indicators, and Remaining Useful Life (RUL) during vessel field trials.
+- Developing an explainable Predictive Maintenance prototype and Digital Twin frameworks using legacy shipboard data to improve maintenance planning for marine auxiliary systems.
+- Building interpretable AI models (GAM, EBM) for ship condition monitoring applications.
+- Developing operator dashboards to visualize health indices, anomaly indicators, and Remaining Useful Life (RUL) during vessel field trials.
+- Collaborating with Amsterdam University of Applied Sciences and industry stakeholders on a funded Professional Doctorate proposal.
