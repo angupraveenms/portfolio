@@ -167,6 +167,14 @@ const StyledProject = styled.div`
     z-index: 1;
     align-self: center; /* Keeps the image vertically centered next to the text */
 
+    /* The hover effect to bring color back */
+    &:hover,
+    &:focus {
+      .img {
+        filter: grayscale(0%);
+      }
+    }
+
     @media (max-width: 768px) {
       grid-column: 1 / -1;
       height: 100%;
@@ -188,7 +196,10 @@ const StyledProject = styled.div`
     .img {
       border-radius: var(--border-radius);
       transition: var(--transition);
-      /* Color filters removed */
+      
+      /* Makes the image Black & White by default */
+      filter: grayscale(100%); 
+      
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
@@ -213,7 +224,7 @@ const Featured = () => {
               description
               cover {
                 childImageSharp {
-                  gatsbyImageData(width: 700, placeholder: BLURRED)
+                  gatsbyImageData(width: 1000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
                 }
               }
               tech
