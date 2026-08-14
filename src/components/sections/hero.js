@@ -45,6 +45,8 @@ const StyledHeroSection = styled.section`
   p {
     margin: 20px 0 0;
     max-width: 540px;
+    text-align: justify;
+    text-justify: inter-word;
   }
 
   .email-link {
@@ -66,22 +68,18 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi, my name is</h1>;
+  const one = <h1>Computational Engineer · PhD Researcher</h1>;
   const two = <h2 className="big-heading">Angu Praveen</h2>;
   const three = (
-    <h3 className="big-heading">
-      Computational Engineer specializing in Simulation, Automation, and AI.
-    </h3>
+    <h3 className="big-heading">From complex physics to practical engineering decisions.</h3>
   );
   const four = (
     <>
       <p>
-        I’m a Computational Engineer specializing in Finite Element Analysis, thermal, structural,
-        mechanical and CFD simulations. Currently, I am a Professional Doctorate Candidate at{' '}
-        <a href="https://www.amsterdamuas.com/" target="_blank" rel="noreferrer">
-          AUAS
-        </a>
-        , focusing on Explainable Predictive Maintenance (PdM) for marine auxiliary systems.
+        I bridge the gap between complex simulation and efficient engineering. Specializing in FEA,
+        CFD, and automation, I build repeatable workflows that reduce manual effort and turn raw
+        structural, thermal, and fluid data into smarter design decisions. Currently researching the
+        mechanics of fibrous paper materials as a PhD candidate at TU Darmstadt.
       </p>
     </>
   );

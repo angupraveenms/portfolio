@@ -4,7 +4,7 @@ weight: 2
 title: 'Multi-Fidelity Aerodynamic Shape Optimization of a BWB Aircraft'
 cover: './initial.png'
 slug: '/featured/bwb-optimization'
-description: 'Built an automated multi-fidelity optimization framework for a Long Range Blended Wing Body aircraft, achieving a 76% reduction in total drag.'
+description: 'Achieved a 75.95% reduction in total drag with an automated multi-fidelity optimization framework for a long-range BWB aircraft.'
 tech:
   - SU2 (CFD)
   - SUAVE

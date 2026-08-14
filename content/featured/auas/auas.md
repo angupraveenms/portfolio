@@ -4,7 +4,7 @@ weight: 3
 title: 'Professional Doctorate: Explainable PdM for Marine Systems'
 cover: './flow.png'
 slug: '/featured/maritime-pdm'
-description: 'Architecting an Explainable Predictive Maintenance (PdM) prototype for maritime diesel generators, converting legacy IT/OT data into auditable, transparent maintenance insights.'
+description: 'Developing an explainable PdM prototype that turns legacy maritime IT/OT data into transparent, auditable maintenance insights.'
 tech:
   - Explainable AI (XAI)
   - Python

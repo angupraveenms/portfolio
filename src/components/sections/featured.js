@@ -196,10 +196,10 @@ const StyledProject = styled.div`
     .img {
       border-radius: var(--border-radius);
       transition: var(--transition);
-      
+
       /* Makes the image Black & White by default */
-      filter: grayscale(100%); 
-      
+      filter: grayscale(100%);
+
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
@@ -224,12 +224,12 @@ const Featured = () => {
               description
               cover {
                 childImageSharp {
-                  gatsbyImageData(width: 1000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                  gatsbyImageData(width: 1000, placeholder: NONE, formats: [AUTO, WEBP, AVIF])
                 }
               }
               tech
               slug
-              weight 
+              weight
             }
           }
         }
@@ -243,7 +243,9 @@ const Featured = () => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {return;}
+    if (prefersReducedMotion) {
+      return;
+    }
     sr.reveal(revealTitle.current, srConfig());
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
   }, []);

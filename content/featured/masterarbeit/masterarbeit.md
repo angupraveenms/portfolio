@@ -4,7 +4,7 @@ weight: 1
 title: 'Automated FEA Strength Verification of Bolted Joints'
 cover: './p2.png'
 slug: '/featured/bolt-analysis'
-description: 'Developed a 14-step ABAQUS Python workflow to automate the verification of safety-critical bolted joints in EPS systems.'
+description: 'Reduced manual verification time by 90% with a 14-step ABAQUS Python workflow for safety-critical EPS bolted joints.'
 tech:
   - VDI 2230
   - ABAQUS (Python API)

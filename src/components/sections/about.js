@@ -134,23 +134,27 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Over the past 4+ years, I’ve worked on simulation-driven product development across
+              Over the past 4+ years, I’ve delivered simulation-driven product development across
               semiconductor, automotive, aerospace, and marine industries.
             </p>
 
             <p>
-              My work has ranged from optimizing cooling circuits for EUV lithography systems, to
-              automating strength verification workflows for automotive steering components, to
-              improving aerodynamic efficiency in long-range aircraft design.
+              I combine structural, thermal, and CFD simulation with automation to reduce manual
+              effort, shorten design cycles, and support better engineering decisions.
             </p>
 
             <p>
-              I enjoy bridging physics-based engineering with automation and AI—building tools and
-              workflows that reduce manual effort, accelerate design iterations, and improve
-              decision-making.
+              Recent work includes cooling-circuit optimization for EUV lithography systems,
+              automated strength verification for automotive steering components, and aerodynamic
+              optimization for long-range aircraft design.
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>
+              My PhD research at TU Darmstadt focuses on micromechanical simulation of nonlinear and
+              inelastic fiber networks for next-generation paper materials.
+            </p>
+
+            <p>Tools I use regularly:</p>
           </div>
 
           <ul className="skills-list">

@@ -60,14 +60,13 @@ const Contact = () => {
       <h2 className="title">Get In Touch</h2>
 
       <p>
-        I am currently open to new opportunities and actively looking for roles where I can apply my
-        expertise in computational engineering, FEA, and data-driven simulations. Whether you have
-        an exciting position in mind, a question about my predictive maintenance research, or just
-        want to connect, my inbox is always open!
+        I’m open to computational-engineering roles and research collaborations involving simulation
+        automation, digital engineering, and explainable AI. If you have an opportunity, a technical
+        challenge, or a question about my predictive-maintenance research, let’s talk.
       </p>
 
       <a className="email-link" href={`mailto:${email}`}>
-        Say Hello
+        Start a conversation
       </a>
     </StyledContactSection>
   );

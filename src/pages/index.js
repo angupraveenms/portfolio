@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Layout, Hero, About, Jobs, Featured, Contact } from '@components';
+import { Layout, Hero, About, Jobs, Research, Featured, Contact } from '@components';
 // Imported your new section directly from the sections folder
 import OnTwoWheels from '../components/sections/ontwowheels';
 
@@ -15,6 +15,7 @@ const IndexPage = ({ location }) => (
       <Hero />
       <About />
       <Jobs />
+      <Research />
       <Featured />
       {/* Your new community leadership and biking section */}
       <OnTwoWheels />

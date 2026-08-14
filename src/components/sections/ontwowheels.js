@@ -112,24 +112,23 @@ const OnTwoWheels = () => (
       <StyledText>
         <div>
           <p>
-              Beyond engineering, I’ve spent years building and leading one of South India’s most
-              active motorcycle touring communities. Organizing rides, planning expeditions, and
-              creating memorable experiences on the road taught me leadership, adaptability, and
-              real-world logistics.
+            Beyond engineering, I have built and led one of South India’s most active motorcycle
+            touring communities. The work sharpened the leadership skills I use in engineering:
+            planning, stakeholder coordination, risk management, and calm decision-making.
           </p>
 
           <h3>Community Leadership (Since 2013)</h3>
 
           <p>
-              Served as <strong>Lead Administrator</strong> for a riding community of
-            <strong> 3,000+ members</strong>.
+            As <strong>Lead Administrator</strong> for a community of{' '}
+            <strong>3,000+ members</strong>, I coordinated people, plans, and safety across rides
+            and events.
           </p>
 
           <ul>
-            <li>Organized and led rides for 30–100+ riders.</li>
-            <li>Planned routes, logistics, and safety for multi-day expeditions.</li>
-            <li>Hosted social gatherings and community events.</li>
-            <li>Managed coordination, conflict resolution, and on-road contingencies.</li>
+            <li>Led groups of 30–100+ riders through shared routes and safety briefings.</li>
+            <li>Planned logistics and risk controls for multi-day expeditions.</li>
+            <li>Coordinated events, resolved conflicts, and handled on-road contingencies.</li>
           </ul>
         </div>
 
@@ -137,9 +136,9 @@ const OnTwoWheels = () => (
           <h3>Personal Journey</h3>
 
           <p>
-              Outside of community leadership, I’ve explored most major regions of India on a
-              motorcycle. These journeys strengthened my endurance, adaptability, and ability to
-              navigate unpredictable environments.
+            Outside of community leadership, I’ve explored most major regions of India on a
+            motorcycle. They strengthened my endurance, adaptability, and ability to navigate
+            unfamiliar and unpredictable environments.
           </p>
         </div>
       </StyledText>
